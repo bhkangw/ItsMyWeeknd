@@ -25,5 +25,16 @@ namespace ItsMyWeeknd.Controllers
             // List<Person> AllUsers = _context.Users.ToList();
             return View();
         }
+
+        [HttpPost]
+        [Route("search")]
+        public IActionResult Search()
+        {
+            if(ModelState.IsValid)
+            {
+                return View("Index");
+            }
+            return View("Index");
+        }
     }
 }

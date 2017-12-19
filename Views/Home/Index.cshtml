@@ -2,15 +2,18 @@
     ViewData["Title"] = "ItsMyWeeknd | Find fun this weekend";
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>
 
 <script>
     $(document).ready(function () {
-        $('form').submit(function () {
+        $('form').submit(function (e) {
+            e.preventDefault()
             var app_key = 'WQ2hJfvj4sjx6jpr';
             var Destination = $('input#Destination').val();
             $.get(`http://api.eventful.com/json/events/search?app_key=${app_key}&l=${Destination}&t=This+Weekend`, function (res) {
                 console.log(res)
                 var html = "";
+                html += '<div id="thing" w-type="event-discovery" w-tmapikey="iBGjTDaYW6pZc1kS2lHMLqqVrYotHVG6" w-googleapikey="AIzaSyCqhoR5ISibhYgUaOZdm_R1WuYep6dNyo0" w-keyword="" w-theme="simple" w-colorscheme="light" w-width="100%" w-height="550" w-size="25" w-border="0" w-borderradius="0" w-postalcode="" w-radius="25" w-period="week" w-layout="fullwidth" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-countrycode="US" w-source="" w-city="Seattle" w-latlong=""></div>';
                 for(var i = 0; i < res.events.event.length; i++){
                     html += "<h2> <a href='" + res.events.event[i].url + "'>" + res.events.event[i].title + "</a> </h2>";
                     html += "<p>" + res.events.event[i].city_name + ", " + res.events.event[i].region_abbr + "</p>";
@@ -25,7 +28,7 @@
                 }
                 $('#results').html(html);
             }, 'jsonp');
-            return false;
+           
 
             $.ajax({
                 type: "GET",
@@ -34,8 +37,12 @@
                 dataType: "json",
                 success: function (json) {
                     console.log(json);
-                    // Parse the response.
-                    // Do other things.
+                    var sidebar = "";
+                    for(var i = 0; i < json._embedded.events.length; i++){
+                        sidebar += "<h4> <a href='" + json._embedded.events[i].url + "'>" + json._embedded.events[i].name + "</a> </h4>";
+                    }
+                    sidebar += '<div w-type="event-discovery" w-tmapikey="iBGjTDaYW6pZc1kS2lHMLqqVrYotHVG6" w-googleapikey="AIzaSyCqhoR5ISibhYgUaOZdm_R1WuYep6dNyo0" w-keyword="" w-theme="listviewthumbnails" w-colorscheme="light" w-width="300" w-height="600" w-size="25" w-border="2" w-borderradius="4" w-postalcode="" w-radius="25" w-period="week" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="xxl" w-titlelink="off" w-countrycode="US" w-source="" w-city="Seattle" w-latlong=""></div>'
+                    $('#ticketmaster').html(sidebar);
                 },
                 error: function (xhr, status, err) {
                     // This time, we do not end up here!
@@ -45,6 +52,7 @@
         })
     });
 </script>
+
 <a href="res.events.event[i].url"></a>
 <div class="container"><br>
 <div class="jumbotron">
@@ -70,8 +78,11 @@
         <input type="checkbox" name="" id="weeknd" checked> This Weekend! <br><br>
 
         <input type="submit" value="Search" class="btn btn-primary">
-    </form>
+    </form><br>
     <div id="ticketmaster"></div>
 </div>
 <div class="container col-lg-9 col-md-9 col-sm-9 col-xs-9" id="results"></div>
 </div>
+
+
+<script src="https://ticketmaster-api-staging.github.io/products-and-docs/widgets/event-discovery/1.0.0/lib/main-widget.js"></script>

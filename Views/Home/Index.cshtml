@@ -1,31 +1,77 @@
 ﻿@{
     ViewData["Title"] = "ItsMyWeeknd | Find fun this weekend";
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
+<script>
+    $(document).ready(function () {
+        $('form').submit(function () {
+            var app_key = 'WQ2hJfvj4sjx6jpr';
+            var Destination = $('input#Destination').val();
+            $.get(`http://api.eventful.com/json/events/search?app_key=${app_key}&l=${Destination}&t=This+Weekend`, function (res) {
+                console.log(res)
+                var html = "";
+                for(var i = 0; i < res.events.event.length; i++){
+                    html += "<h2> <a href='" + res.events.event[i].url + "'>" + res.events.event[i].title + "</a> </h2>";
+                    html += "<p>" + res.events.event[i].city_name + ", " + res.events.event[i].region_abbr + "</p>";
+                    html += "<p>" + res.events.event[i].start_time + "</p>";
+                    if(res.events.event[i].description){
+                        html += "<p>" + res.events.event[i].description + "</p>";
+                    }
+                    if(res.events.event[i].image){
+                        html += '<img src="' + res.events.event[i].image["medium"]["url"] + '" alt="">'
+                    }
+                    html += "<hr>";
+                }
+                $('#results').html(html);
+            }, 'jsonp');
+            return false;
+
+            $.ajax({
+                type: "GET",
+                url: "https://app.ticketmaster.com/discovery/v2/events.json?city=" + Destination + "&apikey=iBGjTDaYW6pZc1kS2lHMLqqVrYotHVG6",
+                async: true,
+                dataType: "json",
+                success: function (json) {
+                    console.log(json);
+                    // Parse the response.
+                    // Do other things.
+                },
+                error: function (xhr, status, err) {
+                    // This time, we do not end up here!
+                }
+            });
+
+        })
+    });
+</script>
+<a href="res.events.event[i].url"></a>
 <div class="container"><br>
 <div class="jumbotron">
     <h1>It's My Weeknd 🎇</h1>
     <p>Let's find you something fun to do! 🤘</p>
 </div>
-<div class="container">
-    <h2>Search Things To Do</h2>
+<div class="container col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <h3>Search Things To Do</h3>
     @model ItsMyWeeknd.Models.Event
-    <form action="search" method="post"><br>
+    <form action="search" method="post">
         <label asp-for="Destination"></label>
-        <input asp-for="Destination" class="form-control">
+        <input asp-for="Destination" name="Destination" id="Destination" class="form-control">
         <span asp-validation-for="Destination"></span>
 
-        <label asp-for="FromDate"></label>
+        <!-- <label asp-for="FromDate"></label>
         <input asp-for="FromDate" type="date" class="form-control">
         <span asp-validation-for="FromDate"></span>
 
         <label asp-for="ToDate"></label>
         <input asp-for="ToDate" type="date" class="form-control">
-        <span asp-validation-for="ToDate"></span>
-
-        <input type="checkbox" name="" id="weeknd"> This Weekend! <br><br>
+        <span asp-validation-for="ToDate"></span> -->
+        
+        <input type="checkbox" name="" id="weeknd" checked> This Weekend! <br><br>
 
         <input type="submit" value="Search" class="btn btn-primary">
     </form>
+    <div id="ticketmaster"></div>
 </div>
+<div class="container col-lg-9 col-md-9 col-sm-9 col-xs-9" id="results"></div>
 </div>

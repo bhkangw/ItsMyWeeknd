@@ -26,6 +26,14 @@ namespace ItsMyWeeknd.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("widget")]
+        public IActionResult Widget()
+        {
+            // List<Person> AllUsers = _context.Users.ToList();
+            return View("Widget");
+        }
+
         [HttpPost]
         [Route("search")]
         public IActionResult Search()

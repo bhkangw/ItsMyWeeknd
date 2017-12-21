@@ -42,9 +42,9 @@
                 $('#thing').css("height", "200px")
                 $('#thing').css("width", "800px")
                 $('#thing').css("outline", "1px dotted red")
-                // $('#thing').attr("w-city", Destination)
+                $('#thing').attr("w-city", Destination)
                 $("#thing").load(location.href + " widget");
-                // $("#thing").load(location.href + " #thing", function (e) { console.log(e) });
+                $("#thing").load(location.href + " #thing", function (e) { console.log(e) });
             }, 'jsonp');
            
 

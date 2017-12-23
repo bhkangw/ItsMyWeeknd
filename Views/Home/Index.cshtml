@@ -19,7 +19,7 @@
             $.get(`http://api.eventful.com/json/events/search?app_key=${app_key}&l=${Destination}&t=This+Weekend`, function (res) {
                 console.log(res)
                 var html = "";
-                html += '<div id="thing" w-type="event-discovery" w-tmapikey="iBGjTDaYW6pZc1kS2lHMLqqVrYotHVG6" w-googleapikey="AIzaSyCqhoR5ISibhYgUaOZdm_R1WuYep6dNyo0" w-keyword="" w-theme="simple" w-colorscheme="light" w-width="100%" w-height="550" w-size="25" w-border="0" w-borderradius="0" w-postalcode="" w-radius="25" w-period="week" w-layout="fullwidth" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-countrycode="US" w-source="" w-city="' + Destination + '" w-latlong=""></div>';
+                html += '<div w-type="event-discovery" w-tmapikey="iBGjTDaYW6pZc1kS2lHMLqqVrYotHVG6" w-googleapikey="AIzaSyCqhoR5ISibhYgUaOZdm_R1WuYep6dNyo0" w-keyword="" w-theme="simple" w-colorscheme="light" w-width="100%" w-height="550" w-size="25" w-border="0" w-borderradius="0" w-postalcode="" w-radius="25" w-period="week" w-layout="fullwidth" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-titlelink="off" w-countrycode="US" w-source="" w-city="' + Destination + '" w-latlong=""></div>';
                 html += '<br><br><div class="eventful-badge eventful-large"><img src="http://api.eventful.com/images/powered/eventful_139x44.gif" alt="Local Events, Concerts, Tickets"><p><a href="http://eventful.com/">Events</a> by Eventful</p></div>'
                 for(var i = 0; i < res.events.event.length; i++){
                     html += "<h2> <a href='" + res.events.event[i].url + "'>" + res.events.event[i].title + "</a> </h2>";
@@ -59,7 +59,7 @@
                     for(var i = 0; i < json._embedded.events.length; i++){
                         sidebar += "<h4> <a href='" + json._embedded.events[i].url + "'>" + json._embedded.events[i].name + "</a> </h4>";
                     }
-                    sidebar += '<br><h3>Map</h3><div w-type="map" w-tmapikey="iBGjTDaYW6pZc1kS2lHMLqqVrYotHVG6" w-googleapikey="AIzaSyCqhoR5ISibhYgUaOZdm_R1WuYep6dNyo0" w-keyword="" w-theme="simple" w-colorscheme="light" w-width="250" w-height="600" w-size="25" w-border="0" w-borderradius="4" w-postalcode="" w-radius="25" w-city="' + Destination + '" w-period="week" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-geoposition="off" w-latlong="" w-classificationname=""></div>'
+                    sidebar += '<br><h3>Map</h3><div id="thing" w-type="map" w-tmapikey="iBGjTDaYW6pZc1kS2lHMLqqVrYotHVG6" w-googleapikey="AIzaSyCqhoR5ISibhYgUaOZdm_R1WuYep6dNyo0" w-keyword="" w-theme="simple" w-colorscheme="light" w-width="250" w-height="600" w-size="25" w-border="0" w-borderradius="4" w-postalcode="" w-radius="25" w-city="' + Destination + '" w-period="week" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="custom" w-geoposition="off" w-latlong="" w-classificationname=""></div>'
                     $('#ticketmaster').html(sidebar);
                 },
                 error: function (xhr, status, err) {

@@ -62,7 +62,7 @@
                     for(var i = 0; i < json._embedded.events.length; i++){
                         sidebar += "<h4> <a href='" + json._embedded.events[i].url + "'>" + json._embedded.events[i].name + "</a> </h4>";
                         for(var j = 0; j < json._embedded.events[i]._embedded.venues.length; j++){
-                            sidebar += "<p> Venue: " + json._embedded.events[i]._embedded.venues[j].name + " </p><br>";
+                            sidebar += "<p> Venue: " + json._embedded.events[i]._embedded.venues[j].name + " </p><hr>";
                         }
                     }
                     // amending html with map widget
@@ -100,7 +100,8 @@
         <input asp-for="ToDate" type="date" class="form-control">
         <span asp-validation-for="ToDate"></span> -->
         
-        <input type="checkbox" name="" id="weeknd" checked> This Weekend! <br><br>
+        <!-- <input type="checkbox" name="" id="weeknd" checked> This Weekend! <br> -->
+        <br>
 
         <input type="submit" value="Search" class="btn btn-primary">
     </form><br>

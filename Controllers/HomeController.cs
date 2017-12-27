@@ -26,21 +26,22 @@ namespace ItsMyWeeknd.Controllers
             return View();
         }
 
-        [HttpGet]
-        [Route("widget")]
-        public IActionResult Widget()
-        {
-            // List<Person> AllUsers = _context.Users.ToList();
-            return View("Widget");
-        }
+        // [HttpGet]
+        // [Route("widget")]
+        // public IActionResult Widget()
+        // {
+        //     // List<Person> AllUsers = _context.Users.ToList();
+        //     return View("Widget");
+        // }
 
         [HttpPost]
         [Route("search")]
-        public IActionResult Search()
+        public IActionResult Search(string Destination)
         {
             if(ModelState.IsValid)
             {
-                return View("Index");
+                string url = "http://api.eventful.com/json/events/search?app_key=$WQ2hJfvj4sjx6jpr&l=${Destination}&t=This+Weekend";
+                return View("Results");
             }
             return View("Index");
         }
